@@ -3780,7 +3780,7 @@ class BaseEC2NodeDriver(NodeDriver):
                           image_location=None, root_device_name=None,
                           block_device_mapping=None, kernel_id=None,
                           ramdisk_id=None, virtualization_type=None,
-                          ena_support=None):
+                          ena_support=None, billing_products=None):
         """
         Registers an Amazon Machine Image based off of an EBS-backed instance.
         Can also be used to create images from snapshots. More information
@@ -3824,6 +3824,9 @@ class BaseEC2NodeDriver(NodeDriver):
                                  Network Adapter for the AMI
         :type       ena_support: ``bool``
 
+        :param      billing_product: The billing product codes
+        :type       billing_product: ''list''
+
         :rtype:     :class:`NodeImage`
         """
 
@@ -3857,6 +3860,10 @@ class BaseEC2NodeDriver(NodeDriver):
 
         if ena_support is not None:
             params['EnaSupport'] = ena_support
+
+        if billing_products is not None:
+            params.update(self._get_billing_product_params(
+                          billing_products))
 
         image = self._to_image(
             self.connection.request(self.path, params=params).object
@@ -5770,6 +5777,13 @@ class BaseEC2NodeDriver(NodeDriver):
         # Build block device mapping
         block_device_mapping = self._to_device_mappings(element)
 
+        billing_products = []
+        for p in findall(element=element,
+                         xpath="billingProducts/item/billingProduct",
+                         namespace=NAMESPACE):
+
+            billing_products.append(p.text)
+
         # Get our tags
         tags = self._get_resource_tags(element)
 
@@ -5780,7 +5794,7 @@ class BaseEC2NodeDriver(NodeDriver):
         # Add our tags and block device mapping
         extra['tags'] = tags
         extra['block_device_mapping'] = block_device_mapping
-
+        extra['billing_product'] = billing_products
         return NodeImage(id=id, name=name, driver=self, extra=extra)
 
     def _to_volume(self, element, name=None):
@@ -6597,6 +6611,27 @@ class BaseEC2NodeDriver(NodeDriver):
 
             for k, v in content.items():
                 params['ClientData.%s' % (k)] = str(v)
+
+    def _get_billing_product_params(self, billing_products):
+        """
+        Return a list of dictionaries with valid param for billing product.
+
+        :param      billing_product: List of billing code values(str)
+        :type       billing product: ``list``
+
+        :return:    Dictionary representation of the billing product codes
+        :rtype:     ``dict``
+        """
+
+        if not isinstance(billing_products, (list, tuple)):
+            raise AttributeError(
+                'billing_products not list or tuple')
+
+        params = {}
+
+        for idx, v in enumerate(billing_products):
+            idx += 1  # We want 1-based indexes
+            params['BillingProduct.%d' % (idx)] = str(v)
 
         return params
 
