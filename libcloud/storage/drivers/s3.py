@@ -50,10 +50,15 @@ from libcloud.storage.types import ObjectHashMismatchError
 EXPIRATION_SECONDS = 15 * 60
 
 S3_US_STANDARD_HOST = 's3.amazonaws.com'
+S3_US_EAST2_HOST = 's3-us-east-2.amazonaws.com'
 S3_US_WEST_HOST = 's3-us-west-1.amazonaws.com'
 S3_US_WEST_OREGON_HOST = 's3-us-west-2.amazonaws.com'
+S3_US_GOV_WEST_HOST = 's3-us-gov-west-1.amazonaws.com'
 S3_CN_NORTH_HOST = 's3.cn-north-1.amazonaws.com.cn'
 S3_EU_WEST_HOST = 's3-eu-west-1.amazonaws.com'
+S3_EU_WEST2_HOST = 's3-eu-west-2.amazonaws.com'
+S3_EU_CENTRAL_HOST = 's3-eu-central-1.amazonaws.com'
+S3_AP_SOUTH_HOST = 's3-ap-south-1.amazonaws.com'
 S3_AP_SOUTHEAST_HOST = 's3-ap-southeast-1.amazonaws.com'
 S3_AP_SOUTHEAST2_HOST = 's3-ap-southeast-2.amazonaws.com'
 S3_AP_NORTHEAST1_HOST = 's3-ap-northeast-1.amazonaws.com'
@@ -61,6 +66,7 @@ S3_AP_NORTHEAST2_HOST = 's3-ap-northeast-2.amazonaws.com'
 S3_AP_NORTHEAST_HOST = S3_AP_NORTHEAST1_HOST
 S3_SA_EAST_HOST = 's3-sa-east-1.amazonaws.com'
 S3_SA_SOUTHEAST2_HOST = 's3-sa-east-2.amazonaws.com'
+S3_CA_CENTRAL_HOST = 's3-ca-central-1.amazonaws.com'
 
 API_VERSION = '2006-03-01'
 NAMESPACE = 'http://s3.amazonaws.com/doc/%s/' % (API_VERSION)
@@ -734,6 +740,30 @@ class S3StorageDriver(AWSDriver, BaseS3StorageDriver):
     connectionCls = S3Connection
 
 
+class S3USEast2Connection(SignedAWSConnection, BaseS3Connection):
+    host = S3_US_EAST2_HOST
+    service_name = 's3'
+    version = API_VERSION
+
+    def __init__(self, user_id, key, secure=True, host=None, port=None,
+                 url=None, timeout=None, proxy_url=None, token=None,
+                 retry_delay=None, backoff=None):
+        super(S3USEast2Connection, self).__init__(
+            user_id, key, secure, host,
+            port, url, timeout, proxy_url,
+            token, retry_delay, backoff,
+            4)  # force version 4
+
+
+class S3USEast2StorageDriver(S3StorageDriver):
+    name = 'Amazon S3 (us-east-2)'
+    connectionCls = S3USEast2Connection
+    ex_location_name = 'us-east-2'
+    region_name = 'us-east-2'
+    # v4 auth and multipart_upload currently do not work.
+    supports_s3_multipart_upload = False
+
+
 class S3USWestConnection(S3Connection):
     host = S3_US_WEST_HOST
 
@@ -752,6 +782,16 @@ class S3USWestOregonStorageDriver(S3StorageDriver):
     name = 'Amazon S3 (us-west-2)'
     connectionCls = S3USWestOregonConnection
     ex_location_name = 'us-west-2'
+
+
+class S3USGovWestConnection(S3Connection):
+    host = S3_US_GOV_WEST_HOST
+
+
+class S3USGovWestStorageDriver(S3StorageDriver):
+    name = 'Amazon S3 (us-gov-west-1)'
+    connectionCls = S3USGovWestConnection
+    ex_location_name = 'us-gov-west-1'
 
 
 class S3CNNorthConnection(SignedAWSConnection, BaseS3Connection):
@@ -786,6 +826,54 @@ class S3EUWestStorageDriver(S3StorageDriver):
     name = 'Amazon S3 (eu-west-1)'
     connectionCls = S3EUWestConnection
     ex_location_name = 'EU'
+
+
+class S3EUWest2Connection(SignedAWSConnection, BaseS3Connection):
+    host = S3_EU_WEST2_HOST
+    service_name = 's3'
+    version = API_VERSION
+
+    def __init__(self, user_id, key, secure=True, host=None, port=None,
+                 url=None, timeout=None, proxy_url=None, token=None,
+                 retry_delay=None, backoff=None):
+        super(S3EUWest2Connection, self).__init__(
+            user_id, key, secure, host,
+            port, url, timeout, proxy_url,
+            token, retry_delay, backoff,
+            4)  # force version 4
+
+
+class S3EUWest2StorageDriver(S3StorageDriver):
+    name = 'Amazon S3 (eu-west-2)'
+    connectionCls = S3EUWest2Connection
+    ex_location_name = 'eu-west-2'
+    region_name = 'eu-west-2'
+    # v4 auth and multipart_upload currently do not work.
+    supports_s3_multipart_upload = False
+
+
+class S3EUCentralConnection(SignedAWSConnection, BaseS3Connection):
+    host = S3_EU_CENTRAL_HOST
+    service_name = 's3'
+    version = API_VERSION
+
+    def __init__(self, user_id, key, secure=True, host=None, port=None,
+                 url=None, timeout=None, proxy_url=None, token=None,
+                 retry_delay=None, backoff=None):
+        super(S3EUCentralConnection, self).__init__(
+            user_id, key, secure, host,
+            port, url, timeout, proxy_url,
+            token, retry_delay, backoff,
+            4)  # force version 4
+
+
+class S3EUCentralStorageDriver(S3StorageDriver):
+    name = 'Amazon S3 (eu-central-1)'
+    connectionCls = S3EUCentralConnection
+    ex_location_name = 'eu-central-1'
+    region_name = 'eu-central-1'
+    # v4 auth and multipart_upload currently do not work.
+    supports_s3_multipart_upload = False
 
 
 class S3APSEConnection(S3Connection):
@@ -845,6 +933,30 @@ class S3APNE2StorageDriver(S3StorageDriver):
     supports_s3_multipart_upload = False
 
 
+class S3APSouthConnection(SignedAWSConnection, BaseS3Connection):
+    host = S3_AP_SOUTH_HOST
+    service_name = 's3'
+    version = API_VERSION
+
+    def __init__(self, user_id, key, secure=True, host=None, port=None,
+                 url=None, timeout=None, proxy_url=None, token=None,
+                 retry_delay=None, backoff=None):
+        super(S3APSouthConnection, self).__init__(
+            user_id, key, secure, host,
+            port, url, timeout, proxy_url,
+            token, retry_delay, backoff,
+            4)  # force version 4
+
+
+class S3APSouthStorageDriver(S3StorageDriver):
+    name = 'Amazon S3 (ap-south-1)'
+    connectionCls = S3APSouthConnection
+    ex_location_name = 'ap-south-1'
+    region_name = 'ap-south-1'
+    # v4 auth and multipart_upload currently do not work.
+    supports_s3_multipart_upload = False
+
+
 class S3SAEastConnection(S3Connection):
     host = S3_SA_EAST_HOST
 
@@ -853,3 +965,27 @@ class S3SAEastStorageDriver(S3StorageDriver):
     name = 'Amazon S3 (sa-east-1)'
     connectionCls = S3SAEastConnection
     ex_location_name = 'sa-east-1'
+
+
+class S3CACentralConnection(SignedAWSConnection, BaseS3Connection):
+    host = S3_CA_CENTRAL_HOST
+    service_name = 's3'
+    version = API_VERSION
+
+    def __init__(self, user_id, key, secure=True, host=None, port=None,
+                 url=None, timeout=None, proxy_url=None, token=None,
+                 retry_delay=None, backoff=None):
+        super(S3CACentralConnection, self).__init__(
+            user_id, key, secure, host,
+            port, url, timeout, proxy_url,
+            token, retry_delay, backoff,
+            4)  # force version 4
+
+
+class S3CACentralStorageDriver(S3StorageDriver):
+    name = 'Amazon S3 (ca-central-1)'
+    connectionCls = S3CACentralConnection
+    ex_location_name = 'ca-central-1'
+    region_name = 'ca-central-1'
+    # v4 auth and multipart_upload currently do not work.
+    supports_s3_multipart_upload = False

@@ -515,6 +515,66 @@ INSTANCE_TYPES = {
             'cpu': 32
         }
     },
+    'i3.large': {
+        'id': 'i3.large',
+        'name': 'High I/O Storage Optimized Large Instance',
+        'ram': GiB(15.25),
+        'disk': 475,  # GB
+        'bandwidth': None,
+        'extra': {
+            'cpu': 2
+        }
+    },
+    'i3.xlarge': {
+        'id': 'i3.xlarge',
+        'name': 'High I/O Storage Optimized Extra Large Instance',
+        'ram': GiB(30.5),
+        'disk': 950,  # GB
+        'bandwidth': None,
+        'extra': {
+            'cpu': 4
+        }
+    },
+    'i3.2xlarge': {
+        'id': 'i3.2xlarge',
+        'name': 'High I/O Storage Optimized Double Extra Large Instance',
+        'ram': GiB(61),
+        'disk': 1900,  # GB
+        'bandwidth': None,
+        'extra': {
+            'cpu': 8
+        }
+    },
+    'i3.4xlarge': {
+        'id': 'i3.4xlarge',
+        'name': 'High I/O Storage Optimized Quadruple Large Instance',
+        'ram': GiB(122),
+        'disk': 2 * 1900,  # GB
+        'bandwidth': None,
+        'extra': {
+            'cpu': 16
+        }
+    },
+    'i3.8xlarge': {
+        'id': 'i3.8xlarge',
+        'name': 'High I/O Storage Optimized Eight Extra Large Instance',
+        'ram': GiB(244),
+        'disk': 4 * 1900,  # GB
+        'bandwidth': None,
+        'extra': {
+            'cpu': 32
+        }
+    },
+    'i3.16xlarge': {
+        'id': 'i3.16xlarge',
+        'name': 'High I/O Storage Optimized Sixteen Extra Large Instance',
+        'ram': GiB(488),
+        'disk': 8 * 1900,  # GB
+        'bandwidth': None,
+        'extra': {
+            'cpu': 64
+        }
+    },
     'd2.xlarge': {
         'id': 'd2.xlarge',
         'name': 'Dense Storage Optimized Extra Large Instance',
@@ -649,12 +709,42 @@ INSTANCE_TYPES = {
     },
     't2.large': {
         'id': 't2.large',
-        'name': 'Burstable Performance Medium Instance',
+        'name': 'Burstable Performance Large Instance',
         'ram': GiB(8),
         'disk': 0,  # EBS Only
         'bandwidth': None,
         'extra': {
             'cpu': 2
+        }
+    },
+    't2.xlarge': {
+        'id': 't2.xlarge',
+        'name': 'Burstable Performance Extra Large Instance',
+        'ram': GiB(16),
+        'disk': 0,  # EBS Only
+        'bandwidth': None,
+        'extra': {
+            'cpu': 4
+        }
+    },
+    't2.2xlarge': {
+        'id': 't2.2xlarge',
+        'name': 'Burstable Performance Double Extra Large Instance',
+        'ram': GiB(32),
+        'disk': 0,  # EBS Only
+        'bandwidth': None,
+        'extra': {
+            'cpu': 8
+        }
+    },
+    'x1.16xlarge': {
+        'id': 'x1.16xlarge',
+        'name': 'Memory Optimized Sixteen Extra Large instance',
+        'ram': GiB(976),
+        'disk': 1920,  # GB
+        'bandwidth': None,
+        'extra': {
+            'cpu': 64
         }
     },
     'x1.32xlarge': {
@@ -795,7 +885,7 @@ REGION_DETAILS = {
         'endpoint': 'ec2.us-east-2.amazonaws.com',
         'api_name': 'ec2_us_east_ohio',
         'country': 'USA',
-        'signature_version': '2',
+        'signature_version': '4',
         'instance_types': [
             't1.micro',
             'm1.small',
@@ -976,6 +1066,52 @@ REGION_DETAILS = {
             't2.medium',
             't2.large',
             'x1.32xlarge'
+        ]
+    },
+    # EU (London) Region
+    'eu-west-2': {
+        'endpoint': 'ec2.eu-west-2.amazonaws.com',
+        'api_name': 'ec2_eu_west_2',
+        'country': 'United Kindom',
+        'signature_version': '4',
+        'instance_types': [
+            't1.micro',
+            't2.nano',
+            't2.micro',
+            't2.small',
+            't2.medium',
+            't2.large',
+            't2.xlarge',
+            't2.2xlarge',
+            'm4.large',
+            'm4.xlarge',
+            'm4.2xlarge',
+            'm4.4xlarge',
+            'm4.10xlarge',
+            'm4.16xlarge',
+            'c4.large',
+            'c4.xlarge',
+            'c4.2xlarge',
+            'c4.4xlarge',
+            'c4.8xlarge',
+            'r4.large',
+            'r4.xlarge',
+            'r4.2xlarge',
+            'r4.4xlarge',
+            'r4.8xlarge',
+            'r4.16xlarge',
+            'x1.16xlarge',
+            'x1.32xlarge',
+            'd2.xlarge',
+            'd2.2xlarge',
+            'd2.4xlarge',
+            'd2.8xlarge',
+            'i3.large',
+            'i3.xlarge',
+            'i3.2xlarge',
+            'i3.4xlarge',
+            'i3.8xlarge',
+            'i3.16xlarge',
         ]
     },
     # EU (Frankfurt) Region
@@ -1363,6 +1499,108 @@ REGION_DETAILS = {
             't2.small',
             't2.medium',
             't2.large'
+        ]
+    },
+    # Canada (Central) Region
+    'ca-central-1': {
+        'endpoint': 'ec2.ca-central-1.amazonaws.com',
+        'api_name': 'ec2_ca_central',
+        'country': 'Canada',
+        'signature_version': '4',
+        'instance_types': [
+            't1.micro',
+            't2.nano',
+            't2.micro',
+            't2.small',
+            't2.medium',
+            't2.large',
+            't2.xlarge',
+            't2.2xlarge',
+            'm4.large',
+            'm4.xlarge',
+            'm4.2xlarge',
+            'm4.4xlarge',
+            'm4.10xlarge',
+            'm4.16xlarge',
+            'c4.large',
+            'c4.xlarge',
+            'c4.2xlarge',
+            'c4.4xlarge',
+            'c4.8xlarge',
+            'r4.large',
+            'r4.xlarge',
+            'r4.2xlarge',
+            'r4.4xlarge',
+            'r4.8xlarge',
+            'r4.16xlarge',
+            'x1.16xlarge',
+            'x1.32xlarge',
+            'd2.xlarge',
+            'd2.2xlarge',
+            'd2.4xlarge',
+            'd2.8xlarge',
+            'i3.large',
+            'i3.xlarge',
+            'i3.2xlarge',
+            'i3.4xlarge',
+            'i3.8xlarge',
+            'i3.16xlarge',
+        ]
+    },
+    # China (North) Region
+    'cn-north-1': {
+        'endpoint': 'ec2.cn-north-1.amazonaws.com.cn',
+        'api_name': 'ec2_cn_north',
+        'country': 'China',
+        'signature_version': '4',
+        'instance_types': [
+            't1.micro',
+            't2.micro',
+            't2.small',
+            't2.medium',
+            't2.large',
+            't2.xlarge',
+            't2.2xlarge',
+            'm4.large',
+            'm4.xlarge',
+            'm4.2xlarge',
+            'm4.4xlarge',
+            'm4.10xlarge',
+            'm4.16xlarge',
+            'm3.medium',
+            'm3.large',
+            'm3.xlarge',
+            'm3.2xlarge',
+            'm1.small',
+            'c4.large',
+            'c4.xlarge',
+            'c4.2xlarge',
+            'c4.4xlarge',
+            'c4.8xlarge',
+            'c3.large',
+            'c3.xlarge',
+            'c3.2xlarge',
+            'c3.4xlarge',
+            'c3.8xlarge',
+            'r4.large',
+            'r4.xlarge',
+            'r4.2xlarge',
+            'r4.4xlarge',
+            'r4.8xlarge',
+            'r4.16xlarge',
+            'r3.large',
+            'r3.xlarge',
+            'r3.2xlarge',
+            'r3.4xlarge',
+            'r3.8xlarge',
+            'd2.xlarge',
+            'd2.2xlarge',
+            'd2.4xlarge',
+            'd2.8xlarge',
+            'i2.xlarge',
+            'i2.2xlarge',
+            'i2.4xlarge',
+            'i2.8xlarge',
         ]
     },
     'nimbus': {

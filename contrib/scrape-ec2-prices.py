@@ -37,16 +37,21 @@ LINUX_PRICING_URLS = [
 
 EC2_REGIONS = [
     'us-east-1',
+    'us-east-2',
     'us-west-1',
     'us-west-2',
+    'us-gov-west-1',
     'eu-west-1',
+    'eu-west-2',
     'eu-central-1',
     'ap-southeast-1',
     'ap-southeast-2',
     'ap-northeast-1',
     'ap-northeast-2',
     'ap-south-1',
-    'sa-east-1'
+    'sa-east-1',
+    'ca-central-1',
+    'cn-north-1',
 ]
 
 EC2_INSTANCE_TYPES = [
@@ -101,10 +106,12 @@ EC2_INSTANCE_TYPES = [
 REGION_NAME_MAP = {
     'us-east': 'ec2_us_east',
     'us-east-1': 'ec2_us_east',
+    'us-east-2': 'ec2_us_east_ohio',
     'us-west': 'ec2_us_west',
     'us-west-1': 'ec2_us_west',
     'us-west-2': 'ec2_us_west_oregon',
     'eu-west-1': 'ec2_eu_west',
+    'eu-west-2': 'ec2_eu_west_2',
     'eu-ireland': 'ec2_eu_west',
     'eu-central-1': 'ec2_eu_central',
     'apac-sin': 'ec2_ap_southeast',
@@ -116,7 +123,9 @@ REGION_NAME_MAP = {
     'ap-northeast-2': 'ec2_ap_northeast',
     'ap-south-1': 'ec2_ap_south_1',
     'sa-east-1': 'ec2_sa_east',
-    'us-gov-west-1': 'ec2_us_govwest'
+    'us-gov-west-1': 'ec2_us_govwest',
+    'ca-central-1': 'ec2_ca_central',
+    'cn-north-1': 'ec2_cn_north',
 }
 
 INSTANCE_SIZES = [
