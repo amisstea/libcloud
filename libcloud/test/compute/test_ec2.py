@@ -560,7 +560,8 @@ class EC2Tests(LibcloudTestCase, TestCaseMixin):
                                               architecture='x86_64',
                                               block_device_mapping=mapping,
                                               ena_support=True,
-                                              billing_product=['ab-5dh78019'])
+                                              billing_product=['ab-5dh78019'],
+                                              sriov_net_support='simple')
         self.assertEqual(image.id, 'ami-57c2fb3e')
 
     def test_ex_import_snapshot(self):
