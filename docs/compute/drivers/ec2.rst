@@ -17,6 +17,7 @@ It allows users to rent virtual servers in more than 9 regions such as:
 * US West (Oregon) Region
 * US West (Northern California) Region
 * EU West (Ireland) Region
+* EU West (Paris) Region
 * EU Central (Frankfurt) Region
 * Asia Pacific (Singapore) Region
 * Asia Pacific (Sydney) Region
