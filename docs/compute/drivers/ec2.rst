@@ -23,6 +23,7 @@ It allows users to rent virtual servers in more than 9 regions such as:
 * Asia Pacific (Sydney) Region
 * Asia Pacific (Tokyo) Region
 * South America (Sao Paulo) Region
+* China (Ningxia) Region
 
 Using temporary security credentials
 ------------------------------------

@@ -58,6 +58,7 @@ S3_US_WEST_HOST = 's3-us-west-1.amazonaws.com'
 S3_US_WEST_OREGON_HOST = 's3-us-west-2.amazonaws.com'
 S3_US_GOV_WEST_HOST = 's3-us-gov-west-1.amazonaws.com'
 S3_CN_NORTH_HOST = 's3.cn-north-1.amazonaws.com.cn'
+S3_CN_NORTHWEST_HOST = 's3.cn-northwest-1.amazonaws.com.cn'
 S3_EU_WEST_HOST = 's3-eu-west-1.amazonaws.com'
 S3_EU_WEST2_HOST = 's3-eu-west-2.amazonaws.com'
 S3_EU_WEST3_HOST = 's3-eu-west-3.amazonaws.com'
@@ -1056,6 +1057,17 @@ class S3CNNorthStorageDriver(S3StorageDriver):
     connectionCls = S3CNNorthConnection
     ex_location_name = 'cn-north-1'
     region_name = 'cn-north-1'
+
+
+class S3CNNorthWestConnection(S3SignatureV4Connection):
+    host = S3_CN_NORTHWEST_HOST
+
+
+class S3CNNorthWestStorageDriver(S3StorageDriver):
+    name = 'Amazon S3 (cn-northwest-1)'
+    connectionCls = S3CNNorthWestConnection
+    ex_location_name = 'cn-northwest-1'
+    region_name = 'cn-northwest-1'
 
 
 class S3EUWestConnection(S3SignatureV4Connection):
