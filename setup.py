@@ -149,7 +149,8 @@ setup(
     package_data={'libcloud': get_data_files('libcloud', parent='libcloud')},
     license='Apache License (2.0)',
     url='http://libcloud.apache.org/',
-    setup_requires=['pytest-runner'],
+    # Disabled for building on brew
+    #setup_requires=['pytest-runner'],
     tests_require=TEST_REQUIREMENTS,
     cmdclass={
         'apidocs': ApiDocsCommand,
